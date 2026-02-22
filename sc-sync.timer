@@ -1,0 +1,16 @@
+[Unit]
+Description=SHINY COLORS Download Sync Timer
+Requires=sc-sync.service
+
+[Timer]
+# 每天凌晨 3 点运行
+OnCalendar=*-*-* 03:00:00
+
+# 随机延迟 0-30 分钟，避免精确时间点的负载
+RandomizedDelaySec=1800
+
+# 如果错过了运行时间，立即运行
+Persistent=true
+
+[Install]
+WantedBy=timers.target

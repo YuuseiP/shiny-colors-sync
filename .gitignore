@@ -1,0 +1,33 @@
+# 数据库文件 (包含敏感信息)
+shiny_colors_db.json
+
+# 下载目录
+downloads/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 配置文件 (包含密码)
+config.yaml
+
+# 日志
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db

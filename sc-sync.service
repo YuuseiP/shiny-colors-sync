@@ -1,0 +1,22 @@
+[Unit]
+Description=SHINY COLORS Download Sync Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=sc-sync
+Group=sc-sync
+WorkingDirectory=/opt/sc-sync
+ExecStart=/usr/bin/python3 /opt/sc-sync/sc_sync.py
+Environment=PYTHONUNBUFFERED=1
+
+# 日志
+StandardOutput=journal
+StandardError=journal
+
+# 资源限制
+MemoryMax=1G
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target

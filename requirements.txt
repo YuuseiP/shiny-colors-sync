@@ -1,0 +1,13 @@
+# SHINY COLORS 下载同步依赖
+
+# Google Drive 下载
+gdown>=4.7.1
+
+# WebDAV 上传
+webdavclient3>=3.14.6
+
+# 配置文件解析
+PyYAML>=6.0.1
+
+# HTTP 请求 (备用)
+requests>=2.31.0
