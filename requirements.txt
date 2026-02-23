@@ -11,3 +11,9 @@ PyYAML>=6.0.1
 
 # HTTP 请求 (备用)
 requests>=2.31.0
+
+# AES 解密 (sc_manager.py)
+pycryptodomex>=3.20.0
+
+# XML 解析 (WebDAV)
+lxml>=5.0.0
