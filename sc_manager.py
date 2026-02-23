@@ -18,7 +18,7 @@ from Cryptodome.Cipher import AES
 from Cryptodome.Util.Padding import unpad
 
 # 配置
-JSON_FILE = "d:\\CodeFile\\imas\\shiny_colors_db.json"
+JSON_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "shiny_colors_db.json")
 INDEX_URL = "https://wfhtony.github.io/2019/05/04/imas-sc-hi-res-ls/"
 
 
