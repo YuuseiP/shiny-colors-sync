@@ -111,3 +111,92 @@ python sc_manager.py --force
 - gdown (Google Drive 下载)
 - webdavclient3 (WebDAV 上传)
 - PyYAML (配置解析)
+- lxml (XML 解析)
+
+## Linux 部署
+
+### 安装
+
+```bash
+# 克隆仓库
+git clone https://github.com/YuuseiP/shiny-colors-sync.git
+cd shiny-colors-sync
+
+# 创建虚拟环境
+python3 -m venv venv
+source venv/bin/activate
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 创建配置文件
+cp config.yaml.example config.yaml
+nano config.yaml  # 填入 WebDAV 配置
+
+# 首次运行：更新数据库
+python sc_manager.py
+```
+
+### 定时任务 (cron)
+
+```bash
+crontab -e
+```
+
+添加以下内容：
+
+```cron
+# 每天凌晨 3 点同步
+0 3 * * * cd /path/to/shiny-colors-sync && /path/to/venv/bin/python sc_sync.py >> /var/log/sc_sync.log 2>&1
+
+# 每天凌晨 4 点验证数据库
+0 4 * * * cd /path/to/shiny-colors-sync && /path/to/venv/bin/python sc_verify.py >> /var/log/sc_verify.log 2>&1
+
+# 每周一凌晨 2 点更新数据库
+0 2 * * 1 cd /path/to/shiny-colors-sync && /path/to/venv/bin/python sc_manager.py >> /var/log/sc_manager.log 2>&1
+```
+
+### Systemd 服务 (可选)
+
+创建服务文件 `/etc/systemd/system/sc-sync.service`：
+
+```ini
+[Unit]
+Description=SHINY COLORS Sync Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=your_user
+WorkingDirectory=/path/to/shiny-colors-sync
+ExecStart=/path/to/venv/bin/python sc_sync.py
+Environment=PATH=/path/to/venv/bin
+
+[Install]
+WantedBy=multi-user.target
+```
+
+创建定时器 `/etc/systemd/system/sc-sync.timer`：
+
+```ini
+[Unit]
+Description=Run SC Sync daily
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+启用定时器：
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable sc-sync.timer
+sudo systemctl start sc-sync.timer
+
+# 查看状态
+systemctl list-timers
+```
