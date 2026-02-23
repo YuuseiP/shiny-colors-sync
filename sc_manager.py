@@ -297,62 +297,82 @@ def parse_albums(content):
             tracks = re.findall(r'<strong>([^<]+)</strong>', track_block)
             album["track_list"] = [t.strip() for t in tracks if t.strip()]
 
-        # 提取下载链接块
-        download_block_match = re.search(r'<strong>下載</strong>.*?<blockquote>(.*?)</blockquote>', block, re.DOTALL)
+        # 提取下载链接块 - 匹配从 "下載" 到块结束的所有内容
+        download_block_match = re.search(r'<strong>下載</strong>(.*?)(?=<h[23]|$)', block, re.DOTALL)
         if download_block_match:
             download_block = download_block_match.group(1)
 
             # 提取所有链接格式
-            # 格式: <a href="URL"><strong>名称</strong></a> PW：xxx
+            # 格式: <a href="URL">名称</a> PW：xxx 或 <a href="URL"><strong>名称</strong></a> PW：xxx
 
-            # 按格式分组提取 (WAV, AIFF, ALAC 等)
-            format_sections = re.split(r'<p><strong>(WAV|AIFF|ALAC|FLAC|WVP)</strong>', download_block)
+            # 按格式分组提取 - 支持多种格式名称和变体 (WAV, AIFF, ALAC, FLAC, WVP, FLAC+CUE+LOG 等)
+            # 匹配 <strong>后面跟着格式名</strong> 的模式
+            format_sections = re.split(r'<strong>([A-Z][A-Z0-9+]+)</strong>', download_block)
 
-            current_format = None
+            current_format = "unknown"
+            format_keywords = ['WAV', 'AIFF', 'ALAC', 'FLAC', 'WVP']
+
             for i, section in enumerate(format_sections):
-                if section in ['WAV', 'AIFF', 'ALAC', 'FLAC', 'WVP']:
+                # 检查是否是格式名称
+                section_upper = section.upper()
+                if any(section_upper.startswith(kw) for kw in format_keywords):
                     current_format = section
                     continue
 
                 if not section.strip():
                     continue
 
-                # 提取百度盘链接
+                # 提取百度盘链接 (支持有/无strong标签，链接文字可能包含后缀)
                 baidu_matches = re.findall(
-                    r'<a href="(https?://pan\.baidu\.com/s/[^"]+)"[^>]*><strong>[^<]*百度[^<]*</strong></a>[^P]*PW[：:]\s*([^<\s]+)',
+                    r'<a href="(https?://pan\.baidu\.com/s/[^"]+)"[^>]*>(?:<strong>)?[^<]*(?:百度|百毒)[^<]*(?:</strong>)?</a>[^P]*PW[：:]\s*([^<\s]+)',
                     section
                 )
                 for url, pw in baidu_matches:
                     pw = re.sub(r'<br\s*/?>$', '', pw)  # 清理末尾的 <br>
                     album["downloads"].append({
-                        "format": current_format or "unknown",
+                        "format": current_format,
                         "source": "baidu",
                         "url": url,
                         "password": pw
                     })
 
-                # 提取 OneDrive 链接
+                # 提取 OneDrive 链接 (支持多种域名格式)
+                # 支持 wfhtony.space 和 1drv.ms 短链接
                 onedrive_matches = re.findall(
-                    r'<a href="(https?://[^\s"]+wfhtony\.space/s/[^"]+)"[^>]*><strong>Onedrive</strong></a>[^P]*PW[：:]\s*([^<\s]+)',
+                    r'<a href="(https?://[^\s"]+wfhtony\.space/s/[^"]+)"[^>]*>(?:<strong>)?[Oo]ne[Dd]rive[^<]*(?:</strong>)?</a>[^P]*PW[：:]\s*([^<\s]+)',
                     section
                 )
                 for url, pw in onedrive_matches:
                     pw = re.sub(r'<br\s*/?>$', '', pw)  # 清理末尾的 <br>
                     album["downloads"].append({
-                        "format": current_format or "unknown",
+                        "format": current_format,
                         "source": "onedrive",
                         "url": url,
                         "password": pw
                     })
 
-                # 提取 Google Drive 链接
+                # 提取 OneDrive 短链接 (1drv.ms)
+                onedrive_short_matches = re.findall(
+                    r'<a href="(https?://1drv\.ms/[^\s"]+)"[^>]*>(?:<strong>)?[Oo]ne[Dd]rive[^<]*(?:</strong>)?</a>[^P]*PW[：:]\s*([^<\s]+)',
+                    section
+                )
+                for url, pw in onedrive_short_matches:
+                    pw = re.sub(r'<br\s*/?>$', '', pw)
+                    album["downloads"].append({
+                        "format": current_format,
+                        "source": "onedrive",
+                        "url": url,
+                        "password": pw
+                    })
+
+                # 提取 Google Drive 链接 (支持 file/d 和 open?id 两种格式，链接文字可能包含后缀)
                 gdrive_matches = re.findall(
-                    r'<a href="(https?://drive\.google\.com[^"]+)"[^>]*><strong>Google\s*Drive</strong></a>',
+                    r'<a href="(https?://drive\.google\.com/(?:file/d/[^\s"]+|open\?id=[^\s"]+))"[^>]*>(?:<strong>)?Google\s*Drive[^<]*(?:</strong>)?</a>',
                     section
                 )
                 for url in gdrive_matches:
                     album["downloads"].append({
-                        "format": current_format or "unknown",
+                        "format": current_format,
                         "source": "google_drive",
                         "url": url,
                         "password": None
