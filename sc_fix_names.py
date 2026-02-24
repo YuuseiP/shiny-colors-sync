@@ -199,12 +199,18 @@ class NameFixer:
                 if gd_downloads:
                     # 按格式优先级排序
                     format_order = {fmt: i for i, fmt in enumerate(self.formats)}
-                    gd_downloads.sort(key=lambda x: format_order.get(x.get("format", ""), 999))
+                    gd_downloads.sort(key=lambda x: format_order.get(x.get("format", "").upper(), 999))
                     best_format = gd_downloads[0].get("format", "unknown")
+
+                    # 只有有效格式才转大写，unknown 保持原样
+                    if best_format and best_format.upper() in self.formats:
+                        best_format = best_format.upper()
+                    else:
+                        best_format = "unknown"
 
                 album_map[code] = {
                     "series": album.get("_series_name"),
-                    "format": best_format.upper() if best_format else "unknown"
+                    "format": best_format
                 }
         return album_map
 
@@ -229,11 +235,12 @@ class NameFixer:
             album_code = match.group(1)
             current_format = match.group(2)
 
-            # 检查是否需要修复
+            # 检查是否需要修复（只有当前格式是 unknown 且数据库有有效格式时才修复）
             if current_format.lower() == "unknown":
                 expected_filename, expected_format = self.get_expected_filename(album_code, album_map)
 
-                if expected_filename and expected_format and expected_format != "unknown":
+                # 只有当预期格式是有效格式（不是 unknown）时才添加到修复列表
+                if expected_filename and expected_format and expected_format.lower() != "unknown":
                     fixes.append({
                         "full_path": full_path,
                         "old_name": filename,
