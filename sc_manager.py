@@ -306,17 +306,17 @@ def parse_albums(content):
             # 格式: <a href="URL">名称</a> PW：xxx 或 <a href="URL"><strong>名称</strong></a> PW：xxx
 
             # 按格式分组提取 - 支持多种格式名称和变体 (WAV, AIFF, ALAC, FLAC, WVP, FLAC+CUE+LOG 等)
-            # 匹配 <strong>后面跟着格式名</strong> 的模式
-            format_sections = re.split(r'<strong>([A-Z][A-Z0-9+]+)</strong>', download_block)
+            # 匹配 <strong>后面跟着格式名</strong> 的模式，支持大小写
+            format_sections = re.split(r'<strong>([A-Za-z][A-Za-z0-9+\-]+)</strong>', download_block)
 
             current_format = "unknown"
-            format_keywords = ['WAV', 'AIFF', 'ALAC', 'FLAC', 'WVP']
+            format_keywords = ['WAV', 'AIFF', 'ALAC', 'FLAC', 'WVP', 'WAVPACK']
 
             for i, section in enumerate(format_sections):
                 # 检查是否是格式名称
                 section_upper = section.upper()
                 if any(section_upper.startswith(kw) for kw in format_keywords):
-                    current_format = section
+                    current_format = section_upper  # 统一使用大写
                     continue
 
                 if not section.strip():

@@ -296,7 +296,7 @@ class DatabaseVerifier:
         return gdrive_downloads[0] if gdrive_downloads else None
 
     def generate_remote_path(self, album):
-        """生成远程路径"""
+        """生成远程路径，返回所有可能的格式路径列表"""
         series_name = album.get("_series_name", "Unknown")
         album_code = album.get("code", "Unknown")
 
@@ -308,9 +308,15 @@ class DatabaseVerifier:
 
         safe_series = re.sub(r'[^\w\s-]', '', series_name).strip()
         safe_series = re.sub(r'[-\s]+', '_', safe_series)
-        filename = f"{album_code}_{file_format}.zip"
 
-        return f"/{safe_series}/{filename}", file_format
+        # 如果格式是 unknown，返回所有可能的格式路径
+        if file_format == "unknown" or file_format == "Unknown":
+            possible_formats = self.formats + ["unknown", "Unknown"]
+            paths = [f"/{safe_series}/{album_code}_{fmt}.zip" for fmt in possible_formats]
+            return paths, file_format
+
+        filename = f"{album_code}_{file_format}.zip"
+        return [f"/{safe_series}/{filename}"], file_format
 
     def verify_and_update(self, remote_files, base_path, dry_run=False):
         """验证并更新数据库"""
@@ -345,9 +351,9 @@ class DatabaseVerifier:
             series_name = album.get("_series_name", "Unknown")
             album_code = album.get("code", "Unknown")
 
-            # 生成预期的远程路径
-            expected_path, file_format = self.generate_remote_path(album)
-            if not expected_path:
+            # 生成预期的远程路径（可能是列表）
+            expected_paths, file_format = self.generate_remote_path(album)
+            if not expected_paths:
                 stats["no_gdrive_link"] += 1
                 continue
 
@@ -356,9 +362,22 @@ class DatabaseVerifier:
             current_uploaded = sync_status.get("uploaded", False)
             current_downloaded = sync_status.get("downloaded", False)
 
-            # 检查远程是否存在
-            remote_exists = expected_path in remote_paths_normalized
-            remote_full_path, remote_size = remote_paths_normalized.get(expected_path, (None, 0))
+            # 检查远程是否存在（检查所有可能的路径）
+            remote_exists = False
+            remote_full_path = None
+            remote_size = 0
+            matched_format = file_format
+
+            for path in expected_paths:
+                if path in remote_paths_normalized:
+                    remote_exists = True
+                    remote_full_path, remote_size = remote_paths_normalized[path]
+                    # 从匹配的文件名提取实际格式
+                    filename = path.split('/')[-1]
+                    format_match = re.search(r'_([^_]+)\.zip$', filename)
+                    if format_match:
+                        matched_format = format_match.group(1)
+                    break
 
             # 判断是否需要更新
             need_update = False
@@ -374,7 +393,7 @@ class DatabaseVerifier:
                 new_status["uploaded"] = True
                 new_status["remote_path"] = remote_full_path
                 new_status["size"] = remote_size
-                new_status["format"] = file_format
+                new_status["format"] = matched_format
                 if "synced_at" not in new_status:
                     new_status["synced_at"] = datetime.now().isoformat()
             else:
