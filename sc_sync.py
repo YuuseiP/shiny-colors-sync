@@ -200,6 +200,56 @@ class GoogleDriveDownloader:
 
         return False
 
+    @staticmethod
+    def download_with_original_name(url, output_dir, retry_count=3, retry_delay=10):
+        """下载文件并保留原始文件名，返回原始文件名"""
+        try:
+            import gdown
+        except ImportError:
+            logger.error("gdown not installed. Run: pip install gdown")
+            return None
+
+        file_id = GoogleDriveDownloader.extract_file_id(url)
+        if not file_id:
+            logger.error(f"Cannot extract file ID from: {url}")
+            return None
+
+        direct_url = f"https://drive.google.com/uc?id={file_id}"
+
+        for attempt in range(retry_count):
+            try:
+                logger.info(f"Downloading (attempt {attempt + 1}/{retry_count}): {file_id}")
+
+                # 使用 gdown 下载到目录，保留原始文件名
+                output_file = gdown.download(
+                    direct_url,
+                    output_dir,  # 传入目录而不是文件路径
+                    quiet=False,
+                    resume=True
+                )
+
+                # output_file 是下载后的完整路径
+                if output_file and os.path.exists(output_file) and os.path.getsize(output_file) > 0:
+                    original_filename = os.path.basename(output_file)
+                    logger.info(f"Downloaded: {original_filename}")
+                    return original_filename
+                else:
+                    logger.warning("Downloaded file is empty, retrying...")
+
+            except Exception as e:
+                logger.warning(f"Download failed (attempt {attempt + 1}): {e}")
+                # 清理可能的部分下载文件
+                try:
+                    for f in os.listdir(output_dir):
+                        if file_id in f or f.endswith('.tmp'):
+                            os.remove(os.path.join(output_dir, f))
+                except:
+                    pass
+                if attempt < retry_count - 1:
+                    time.sleep(retry_delay)
+
+        return None
+
 
 class WebDAVUploader:
     """WebDAV 上传器"""
@@ -556,24 +606,29 @@ class SyncManager:
             logger.info("  [DRY RUN] Would download and upload")
             return True, "dry_run"
 
-        # 生成路径
+        # 生成路径 - 使用原始文件名
         safe_series = re.sub(r'[^\w\s-]', '', series_name).strip()
         safe_series = re.sub(r'[-\s]+', '_', safe_series)
-        filename = f"{album_code}_{file_format}.zip"
-        local_path = os.path.join(self.config.temp_dir, safe_series, filename)
-        remote_path = f"{self.config.webdav_base_path}/{safe_series}/{filename}"
+        local_dir = os.path.join(self.config.temp_dir, safe_series)
+        remote_dir = f"{self.config.webdav_base_path}/{safe_series}"
 
-        os.makedirs(os.path.dirname(local_path), exist_ok=True)
+        os.makedirs(local_dir, exist_ok=True)
 
-        # 下载
-        if not GoogleDriveDownloader.download(
-            url, local_path,
+        # 下载 - 使用原始文件名
+        original_filename = GoogleDriveDownloader.download_with_original_name(
+            url, local_dir,
             self.config.retry_count, self.config.retry_delay
-        ):
+        )
+        if not original_filename:
             return False, "download_failed"
+
+        local_path = os.path.join(local_dir, original_filename)
+        remote_path = f"{remote_dir}/{original_filename}"
 
         # 获取本地文件大小
         local_size = os.path.getsize(local_path)
+
+        logger.info(f"  Original filename: {original_filename}")
 
         # 上传 (上传前会自动检查是否已存在)
         if not self.uploader.upload(
@@ -594,6 +649,7 @@ class SyncManager:
             "downloaded": False,
             "uploaded": True,
             "format": file_format,
+            "original_filename": original_filename,
             "remote_path": remote_path,
             "size": local_size,
             "synced_at": datetime.now().isoformat()

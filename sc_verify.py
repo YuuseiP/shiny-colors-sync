@@ -295,141 +295,172 @@ class DatabaseVerifier:
 
         return gdrive_downloads[0] if gdrive_downloads else None
 
-    def generate_remote_path(self, album):
-        """生成远程路径，返回所有可能的格式路径列表"""
-        series_name = album.get("_series_name", "Unknown")
-        album_code = album.get("code", "Unknown")
+    def extract_album_code_from_filename(self, filename):
+        """从文件名中提取专辑代码"""
+        # 常见格式：
+        # [210120]THE IDOLM@STER SHINY COLORS COLORFUL FE@THERS -Stella-(ALAC 96kHz_32bit).zip
+        # BW-01_Spread the Wings!! (WAV).zip
+        # 等等
 
-        download_info = self.get_best_download(album)
-        if not download_info:
-            return None, None
+        # 尝试匹配专辑代码格式 (如 BW-01, CF-05, Canvas-06 等)
+        patterns = [
+            r'^\[?\d{6}\]?\s*.*?\s*([A-Z]+-\d+)',  # 带日期前缀的
+            r'^([A-Z]+-\d+)[\s_\-]',  # 简单格式 BW-01_xxx
+            r'^([A-Za-z]+-\d+)[\s_\-\.]',  # 混合格式
+            r'^([A-Za-z]+-\d+)\.zip$',  # 只有代码
+            r'^([A-Za-z]+-\d+)_',  # code_xxx
+        ]
 
-        file_format = download_info.get("format", "unknown")
+        for pattern in patterns:
+            match = re.match(pattern, filename, re.IGNORECASE)
+            if match:
+                return match.group(1).upper()
 
-        safe_series = re.sub(r'[^\w\s-]', '', series_name).strip()
-        safe_series = re.sub(r'[-\s]+', '_', safe_series)
+        return None
 
-        # 如果格式是 unknown，返回所有可能的格式路径
-        if file_format == "unknown" or file_format == "Unknown":
-            possible_formats = self.formats + ["unknown", "Unknown"]
-            paths = [f"/{safe_series}/{album_code}_{fmt}.zip" for fmt in possible_formats]
-            return paths, file_format
+    def extract_format_from_filename(self, filename):
+        """从文件名中提取格式"""
+        filename_upper = filename.upper()
+        for fmt in self.formats:
+            if fmt in filename_upper:
+                return fmt
+        return "unknown"
 
-        filename = f"{album_code}_{file_format}.zip"
-        return [f"/{safe_series}/{filename}"], file_format
+    def build_album_code_map(self):
+        """构建专辑代码到专辑的映射"""
+        code_map = {}
+        for album in self.get_all_albums():
+            code = album.get("code", "")
+            if code:
+                code_upper = code.upper()
+                if code_upper not in code_map:
+                    code_map[code_upper] = album
+        return code_map
+
+    def build_series_dir_map(self):
+        """构建系列名到目录名的映射"""
+        series_map = {}
+        for series_name in self.data.get("series", {}).keys():
+            safe_series = re.sub(r'[^\w\s-]', '', series_name).strip()
+            safe_series = re.sub(r'[-\s]+', '_', safe_series)
+            series_map[safe_series] = series_name
+        return series_map
 
     def verify_and_update(self, remote_files, base_path, dry_run=False):
-        """验证并更新数据库"""
+        """验证并更新数据库 - 使用原始文件名匹配"""
         logger.info("Verifying database against WebDAV files...")
         print("-" * 60)
 
         # 统计
         stats = {
             "total": 0,
-            "uploaded_fixed_true": 0,   # 远程存在，修正为 true
-            "uploaded_fixed_false": 0,  # 远程不存在，修正为 false
-            "downloaded_fixed": 0,      # downloaded 修正为 false
+            "uploaded_fixed_true": 0,
+            "uploaded_fixed_false": 0,
+            "downloaded_fixed": 0,
             "already_correct": 0,
             "no_gdrive_link": 0,
+            "matched_by_code": 0,
         }
 
-        # 构建远程路径集合（标准化）
-        remote_paths_normalized = {}
-        for path, size in remote_files.items():
-            # 标准化路径：移除 base_path 前缀
-            normalized = path
-            if normalized.startswith(base_path):
-                normalized = normalized[len(base_path):]
-            if not normalized.startswith('/'):
-                normalized = '/' + normalized
-            remote_paths_normalized[normalized] = (path, size)
+        # 构建映射
+        album_code_map = self.build_album_code_map()
+        series_dir_map = self.build_series_dir_map()
 
-        albums = self.get_all_albums()
+        # 构建专辑已匹配的文件集合
+        matched_albums = set()
 
-        for album in albums:
-            stats["total"] += 1
-            series_name = album.get("_series_name", "Unknown")
-            album_code = album.get("code", "Unknown")
-
-            # 生成预期的远程路径（可能是列表）
-            expected_paths, file_format = self.generate_remote_path(album)
-            if not expected_paths:
-                stats["no_gdrive_link"] += 1
+        # 遍历远程文件，匹配专辑
+        for full_path, size in remote_files.items():
+            # 提取目录名和文件名
+            path_parts = full_path.replace(base_path, '').strip('/').split('/')
+            if len(path_parts) < 2:
                 continue
+
+            dir_name = path_parts[0]
+            filename = path_parts[-1]
+
+            # 从文件名提取专辑代码
+            album_code = self.extract_album_code_from_filename(filename)
+            if not album_code:
+                continue
+
+            # 查找匹配的专辑
+            album = album_code_map.get(album_code)
+            if not album:
+                logger.debug(f"No album found for code: {album_code} ({filename})")
+                continue
+
+            album_id = id(album)
+            if album_id in matched_albums:
+                continue  # 已匹配过
+
+            matched_albums.add(album_id)
+            stats["matched_by_code"] += 1
 
             # 获取当前状态
             sync_status = album.get("sync_status", {})
             current_uploaded = sync_status.get("uploaded", False)
             current_downloaded = sync_status.get("downloaded", False)
 
-            # 检查远程是否存在（检查所有可能的路径）
-            remote_exists = False
-            remote_full_path = None
-            remote_size = 0
-            matched_format = file_format
+            # 提取格式
+            file_format = self.extract_format_from_filename(filename)
 
-            for path in expected_paths:
-                if path in remote_paths_normalized:
-                    remote_exists = True
-                    remote_full_path, remote_size = remote_paths_normalized[path]
-                    # 从匹配的文件名提取实际格式
-                    filename = path.split('/')[-1]
-                    format_match = re.search(r'_([^_]+)\.zip$', filename)
-                    if format_match:
-                        matched_format = format_match.group(1)
-                    break
-
-            # 判断是否需要更新
+            # 更新状态
             need_update = False
             new_status = sync_status.copy()
 
-            if remote_exists:
-                # 远程存在
-                if not current_uploaded:
-                    logger.info(f"[FIX -> True] {album_code}: remote exists at {remote_full_path}")
-                    stats["uploaded_fixed_true"] += 1
-                    need_update = True
+            if not current_uploaded:
+                logger.info(f"[FIX -> True] {album_code}: found {filename}")
+                stats["uploaded_fixed_true"] += 1
+                need_update = True
 
-                new_status["uploaded"] = True
-                new_status["remote_path"] = remote_full_path
-                new_status["size"] = remote_size
-                new_status["format"] = matched_format
-                if "synced_at" not in new_status:
-                    new_status["synced_at"] = datetime.now().isoformat()
-            else:
-                # 远程不存在
-                if current_uploaded:
-                    logger.info(f"[FIX -> False] {album_code}: remote missing")
-                    stats["uploaded_fixed_false"] += 1
-                    need_update = True
+            new_status["uploaded"] = True
+            new_status["remote_path"] = full_path
+            new_status["size"] = size
+            new_status["format"] = file_format
+            new_status["original_filename"] = filename
+            if "synced_at" not in new_status:
+                new_status["synced_at"] = datetime.now().isoformat()
 
-                new_status["uploaded"] = False
-
-            # downloaded 应该始终为 false（本地不保留文件）
             if current_downloaded:
                 new_status["downloaded"] = False
-                if not need_update:
-                    logger.info(f"[FIX downloaded] {album_code}: downloaded -> False")
                 stats["downloaded_fixed"] += 1
                 need_update = True
-            else:
-                new_status["downloaded"] = False
 
             if need_update:
                 album["sync_status"] = new_status
             else:
                 stats["already_correct"] += 1
 
-        print("-" * 60)
+        # 检查未匹配的专辑
+        for album in self.get_all_albums():
+            if id(album) not in matched_albums:
+                stats["total"] += 1
+                album_code = album.get("code", "Unknown")
 
-        # 打印统计
+                # 检查是否有 Google Drive 链接
+                download_info = self.get_best_download(album)
+                if not download_info:
+                    stats["no_gdrive_link"] += 1
+                    continue
+
+                # 未匹配到远程文件
+                sync_status = album.get("sync_status", {})
+                if sync_status.get("uploaded", False):
+                    logger.info(f"[FIX -> False] {album_code}: not found on remote")
+                    sync_status["uploaded"] = False
+                    stats["uploaded_fixed_false"] += 1
+
+        stats["total"] = len(matched_albums) + stats["uploaded_fixed_false"]
+
+        print("-" * 60)
         logger.info("Verification Statistics:")
-        print(f"  Total albums: {stats['total']}")
-        print(f"  No Google Drive link: {stats['no_gdrive_link']}")
+        print(f"  Matched by code: {stats['matched_by_code']}")
         print(f"  Already correct: {stats['already_correct']}")
         print(f"  Fixed (uploaded -> True): {stats['uploaded_fixed_true']}")
         print(f"  Fixed (uploaded -> False): {stats['uploaded_fixed_false']}")
         print(f"  Fixed (downloaded -> False): {stats['downloaded_fixed']}")
+        print(f"  No Google Drive link: {stats['no_gdrive_link']}")
 
         total_fixed = stats['uploaded_fixed_true'] + stats['uploaded_fixed_false'] + stats['downloaded_fixed']
 
