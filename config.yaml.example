@@ -1,28 +1,10 @@
-# SHINY COLORS 下载同步配置 (示例)
-# 复制此文件为 config.yaml 并填入实际值
+# SHINY COLORS 配置文件示例
+# 复制为 config.yaml 并填写实际值
 
-# WebDAV 配置 (OpenList)
 webdav:
-  url: https://your-openlist-server.com/dav
-  username: YOUR_USERNAME
-  password: YOUR_PASSWORD
-  base_path: /SHINY_COLORS
+  url: "https://your-webdav-server.com"
+  username: "your-username"
+  password: "your-password"
+  base_path: "/SHINY_COLORS"
 
-# 下载配置
-download:
-  temp_dir: ./downloads
-  retry_count: 3
-  retry_delay: 10
-  max_concurrent: 2
-
-# 同步配置
-sync:
-  # 格式优先级 (按顺序尝试)
-  formats:
-    - WAV
-    - AIFF
-    - ALAC
-    - FLAC
-
-# 数据库路径
-database: ./shiny_colors_db.json
+database: "./shiny_colors_db.json"

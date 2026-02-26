@@ -31,3 +31,9 @@ config.yaml
 *.temp
 .DS_Store
 Thumbs.db
+
+# Claude
+.claude/
+
+# Archive
+Archive/
