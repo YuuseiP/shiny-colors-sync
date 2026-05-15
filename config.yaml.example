@@ -7,4 +7,19 @@ webdav:
   password: "your-password"
   base_path: "/SHINY_COLORS"
 
-database: "./shiny_colors_db.json"
+download:
+  temp_dir: "./downloads"
+  use_aria2: false  # 是否使用 aria2 下载（需要先安装 aria2）
+  aria2_path: "aria2c"  # aria2c 命令路径
+  upload_retries: 3  # WebDAV 上传重试次数
+  upload_timeout: 300  # WebDAV 上传超时（秒）
+
+sync:
+  formats:  # 格式优先级
+    - WAV
+    - AIFF
+    - ALAC
+    - FLAC
+
+database: "./shiny_colors_db.json"  # 专辑元数据库
+status_file: "./sync_status.json"  # 同步状态文件（独立管理）

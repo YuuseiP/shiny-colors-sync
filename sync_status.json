@@ -1,0 +1,604 @@
+{
+  "BRILLI@NT WING": {
+    "BW-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/BRILLI@NT WING/[BW-01] Spread the Wings!!/[180606]THE IDOLM@STER SHINY COLORS BRILLI@NT WING 01 Spread the Wings!!(WAV 96kHz_32bit).zip",
+      "size": 458525005,
+      "format": "WAV",
+      "synced_at": "2026-03-03T01:48:01.185566"
+    },
+    "BW-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/BRILLI@NT WING/[BW-02] ヒカリのdestination/[180704]THE IDOLM@STER SHINY COLORS BRILLI@NT WING 02 ヒカリのdestination(WAV 96kHz_32bit).zip",
+      "size": 621350261,
+      "format": "WAV",
+      "synced_at": "2026-03-03T01:58:12.601812"
+    },
+    "BW-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/BRILLI@NT WING/[BW-03] バベルシティ・グレイス/[180801]THE IDOLM@STER SHINY COLORS BRILLI@NT WING 03 バベルシティ・グレイス(WAV 96kHz_32bit).zip",
+      "size": 591202258,
+      "format": "WAV",
+      "synced_at": "2026-03-03T01:59:57.437042"
+    },
+    "BW-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/BRILLI@NT WING/[BW-04] 夢咲きAfter school/[180905]THE IDOLM@STER SHINY COLORS BRILLI@NT WING 04 夢咲きAfter school(WAV 96kHz_32bit).zip",
+      "size": 607299067,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:01:41.606966"
+    },
+    "BW-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/BRILLI@NT WING/[BW-05] アルストロメリア/[181003]THE IDOLM@STER SHINY COLORS BRILLI@NT WING 05 アルストロメリア(WAV 96kHz_32bit).zip",
+      "size": 624742959,
+      "format": "WAV",
+      "synced_at": "2026-03-07T01:32:46.754575"
+    }
+  },
+  "FR@GMENT WING": {
+    "FW-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/FR@GMENT WING/[FW-02] We can go now!/[190508]THE IDOLM@STER SHINY COLORS FR@GMENT WING 02(WAV 96kHz_32bit).zip",
+      "size": 531091576,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:05:32.738381"
+    },
+    "FW-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/FR@GMENT WING/[FW-03] NEO THEORY FANTASY/[190612]THE IDOLM@STER SHINY COLORS FR@GMENT WING 03(WAV 96kHz_32bit).zip",
+      "size": 579561859,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:07:20.272444"
+    },
+    "FW-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/FR@GMENT WING/[FW-04] ビーチブレイバー/[190710]THE IDOLM@STER SHINY COLORS FR@GMENT WING 04(WAV 96kHz_32bit).zip",
+      "size": 541642997,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:10:45.961507"
+    },
+    "FW-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/FR@GMENT WING/[FW-01] Ambitious Eve/[190410]THE IDOLM@STER SHINY COLORS FR@GMENT WING 01(WAV 96kHz_32bit).zip",
+      "size": 394949154,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:16:00.742492"
+    },
+    "FW-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/FR@GMENT WING/[FW-05] Bloomy!/[190821]THE IDOLM@STER SHINY COLORS FR@GMENT WING 05(WAV 96kHz_32bit).zip",
+      "size": 531775494,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:19:22.458965"
+    },
+    "FW-06": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/FR@GMENT WING/[FW-06] Wandering Dream Chaser/[190911]THE IDOLM@STER SHINY COLORS FR@GMENT WING 06(WAV 96kHz_32bit).zip",
+      "size": 522468343,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:22:44.822707"
+    }
+  },
+  "GR@DATE WING": {
+    "FW-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/GR@DATE WING/[FW-01] シャイノグラフィ/[200408]THE IDOLM@STER SHINY COLORS GR@DATE WING 01(WVE 96kHz_32bit).zip",
+      "size": 406640895,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:24:51.414987"
+    },
+    "FW-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/GR@DATE WING/[FW-02] Twinkle way/[201007]Twinkle way from GR@DATE WING 02(WVE 96kHz_32bit).zip",
+      "size": 208133504,
+      "format": "WAV",
+      "synced_at": "2026-03-03T02:26:46.226305"
+    },
+    "FW-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/GR@DATE WING/[FW-03] Black Reverie/[201028]Black Reverie from GR@DATE WING 03(WVE 96kHz_32bit).zip",
+      "size": 211015307,
+      "format": "WAV",
+      "synced_at": "2026-03-07T01:35:31.845970"
+    },
+    "FW-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/GR@DATE WING/[FW-04] 五ツ座流星群/[201111]五ツ座流星群 from GR@DATE WING 04(WVE 96kHz_32bit).zip",
+      "size": 173717563,
+      "format": "WAV",
+      "synced_at": "2026-03-07T01:38:56.096064"
+    },
+    "FW-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/GR@DATE WING/[FW-05] ダブル・イフェクト/[201202]ダブル・イフェクト from GR@DATE WING 05(WVE 96kHz_32bit).zip",
+      "size": 194772832,
+      "format": "WAV",
+      "synced_at": "2026-03-07T01:41:17.288653"
+    },
+    "FW-06": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/GR@DATE WING/[FW-06] Hide &amp; Attack/[200812]Hide & Attack from GR@DATE WING 06(WVE 96kHz_32bit).zip",
+      "size": 186708518,
+      "format": "WAV",
+      "synced_at": "2026-03-07T01:43:38.926575"
+    },
+    "FW-07": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/GR@DATE WING/[FW-07] いつだって僕らは/[200909]いつだって僕らは from GR@DATE WING 07(WVE 96kHz_32bit).zip",
+      "size": 166386429,
+      "format": "WAV",
+      "synced_at": "2026-03-07T02:34:47.134020"
+    }
+  },
+  "COLORFUL FE@THERS": {
+    "CF-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/COLORFUL FE@THERS/[CF-01] -Stella-/[210120]THE IDOLM@STER SHINY COLORS COLORFUL FE@THERS -Stella-(WVE 96kHz_32bit).zip",
+      "size": 1470997523,
+      "format": "WAV",
+      "synced_at": "2026-03-07T02:48:11.865326"
+    },
+    "CF-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/COLORFUL FE@THERS/[CF-02] -Luna-/[210217]THE IDOLM@STER SHINY COLORS COLORFUL FE@THERS -Luna-(WVE 96kHz_32bit).zip",
+      "size": 1594620187,
+      "format": "WAV",
+      "synced_at": "2026-03-07T03:03:37.322428"
+    },
+    "CF-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/COLORFUL FE@THERS/[CF-03] -Sol-/[210310]THE IDOLM@STER SHINY COLORS COLORFUL FE@THERS -Sol-(WVE 96kHz_32bit).zip",
+      "size": 1539069736,
+      "format": "WAV",
+      "synced_at": "2026-03-07T03:19:51.809748"
+    },
+    "Xmas-2021": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/COLORFUL FE@THERS/[Xmas-2021] 神様は死んだ、って/[211220]神様は死んだ、って(WVE 96kHz_32bit).zip",
+      "size": 334321177,
+      "format": "WAV",
+      "synced_at": "2026-03-07T03:24:13.405668"
+    },
+    "CF-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/COLORFUL FE@THERS/[CF-04] -SHHis-/[230726]THE IDOLM@STER SHINY COLORS COLORFUL FE@THERS -SHHis-(FLAC 96kHz_24bit).zip",
+      "size": 516031613,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T03:29:04.983691"
+    },
+    "CF-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/COLORFUL FE@THERS/[CF-05] -CoMETIK-/[241204] THE IDOLM@STER SHINY COLORS COLORFUL FE@THERS -CoMETIK- (FLAC 96kHz_24bit).zip",
+      "size": 539131958,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T03:34:30.781784"
+    },
+    "7th-2025": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/COLORFUL FE@THERS/[7th-2025] 13/[250810] 「1／3」from THE IDOLM@STER SHINY COLORS COLORFUL FE@THERS -CoMETIK- (FLAC 96kHz_24bit).zip",
+      "size": 172021502,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T03:36:38.401865"
+    }
+  },
+  "L@YERED WING": {
+    "LW-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-01] Resonance⁺/[210414]THE IDOLM@STER SHINY COLORS L@YERED WING 01(WVE 96kHz_32bit).zip",
+      "size": 750817118,
+      "format": "WAV",
+      "synced_at": "2026-03-07T03:43:42.930563"
+    },
+    "LW-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-02] PRISISM/[210519]THE IDOLM@STER SHINY COLORS L@YERED WING 02(WVE 96kHz_32bit).zip",
+      "size": 979077356,
+      "format": "WAV",
+      "synced_at": "2026-03-07T03:52:45.271661"
+    },
+    "LW-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-03] abyss of conflict/[210609]THE IDOLM@STER SHINY COLORS L@YERED WING 03(WVE 96kHz_32bit).zip",
+      "size": 943483155,
+      "format": "WAV",
+      "synced_at": "2026-03-07T04:01:20.511289"
+    },
+    "LW-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-04] クライマックスアイランド/[210714]THE IDOLM@STER SHINY COLORS L@YERED WING 04(WVE 96kHz_32bit).zip",
+      "size": 987097024,
+      "format": "WAV",
+      "synced_at": "2026-03-07T04:10:41.658070"
+    },
+    "LW-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-05] パステルカラー パスカラカラー/[210818]THE IDOLM@STER SHINY COLORS L@YERED WING 05(WVE 96kHz_32bit).zip",
+      "size": 998711451,
+      "format": "WAV",
+      "synced_at": "2026-03-07T04:20:28.350968"
+    },
+    "LW-06": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-06] Another Rampage/[210908]THE IDOLM@STER SHINY COLORS L@YERED WING 06(WVE 96kHz_32bit).zip",
+      "size": 866470988,
+      "format": "WAV",
+      "synced_at": "2026-03-07T04:28:22.959840"
+    },
+    "LW-07": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-07] 僕らだけの未来の空/[211013]THE IDOLM@STER SHINY COLORS L@YERED WING 07(WVE 96kHz_32bit).zip",
+      "size": 872146811,
+      "format": "WAV",
+      "synced_at": "2026-03-07T04:37:22.580019"
+    },
+    "LW-08": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/L@YERED WING/[LW-08] OH MY GOD/[210530]OH MY GOD from L@YERED WING 08(WVE 96kHz_32bit).zip",
+      "size": 162355192,
+      "format": "WAV",
+      "synced_at": "2026-03-07T04:39:15.621676"
+    }
+  },
+  "Synthe-Side": {
+    "SS-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/Synthe-Side/[SS-01] Killer×Mission/[220423][220615]THE IDOLM@STER SHINY COLORS Synthe-Side 01(FLAC 96kHz_24bit).zip",
+      "size": 1393925178,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T04:52:34.548652"
+    },
+    "SS-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/Synthe-Side/[SS-02] 相合学舎/[220423][220713]THE IDOLM@STER SHINY COLORS Synthe-Side 02(FLAC 96kHz_24bit).zip",
+      "size": 1674284781,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T05:07:29.492391"
+    },
+    "SS-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/Synthe-Side/[SS-03] Secret utopIA/[220423][220810]THE IDOLM@STER SHINY COLORS Synthe-Side 03(FLAC 96kHz_24bit).zip",
+      "size": 1286131947,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T05:18:54.030582"
+    }
+  },
+  "PANOR@MA WING": {
+    "LW-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-01] 虹の行方/[220413]THE IDOLM@STER SHINY COLORS PANOR@MA WING 01(FLAC 96kHz_24bit).zip",
+      "size": 627403596,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T05:24:36.874434"
+    },
+    "LW-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-02] FELICE/[220511]THE IDOLM@STER SHINY COLORS PANOR@MA WING 02(FLAC 96kHz_24bit).zip",
+      "size": 679924372,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T05:31:07.237880"
+    },
+    "LW-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-03] 浮動性イノセンス/[220615]THE IDOLM@STER SHINY COLORS PANOR@MA WING 03(FLAC 96kHz_24bit).zip",
+      "size": 771211996,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T05:38:50.367662"
+    },
+    "LW-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-04] 一閃は君が導く/[220713]THE IDOLM@STER SHINY COLORS PANOR@MA WING 04(FLAC 96kHz_24bit).zip",
+      "size": 730038767,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T05:45:31.217425"
+    },
+    "LW-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-05] VERY BERRY LOVE/[220810]THE IDOLM@STER SHINY COLORS PANOR@MA WING 05(FLAC 96kHz_24bit).zip",
+      "size": 721160944,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T05:54:05.023647"
+    },
+    "LW-06": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-06] Tracing Defender/[220914]THE IDOLM@STER SHINY COLORS PANOR@MA WING 06(FLAC 96kHz_24bit).zip",
+      "size": 666895622,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T06:02:26.156823"
+    },
+    "LW-07": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-07] Catch the Breeze/[221012]THE IDOLM@STER SHINY COLORS PANOR@MA WING 07(FLAC 96kHz_24bit).zip",
+      "size": 791257419,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T06:09:22.148919"
+    },
+    "LW-08": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/PANOR@MA WING/[LW-08] Fashionable/[221116]THE IDOLM@STER SHINY COLORS PANOR@MA WING 08(FLAC 96kHz_24bit).zip",
+      "size": 678123735,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T06:15:28.758580"
+    }
+  },
+  "WING COLLECTION": {
+    "Best-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/WING COLLECTION/[Best-01] -A side-/[230118]THE IDOLM@STER SHINY COLORS WING COLLECTION -A side-(FLAC 96kHz_24bit).zip",
+      "size": 4348178186,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T06:53:39.951250"
+    },
+    "Best-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/WING COLLECTION/[Best-02] -B side-/[230208]THE IDOLM@STER SHINY COLORS WING COLLECTION -B side-(FLAC 96kHz_24bit).zip",
+      "size": 4236471628,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T07:28:09.479975"
+    },
+    "28colors": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/WING COLLECTION/[28colors] -28 colors- COLLECTION/[251001] THE IDOLM@STER SHINY COLORS -28 colors- COLLECTION (FLAC 96kHz_24bit).zip",
+      "size": 1609016986,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T07:42:05.825924"
+    }
+  },
+  "“CANVAS”": {
+    "Canvas-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'CANVAS'/[Canvas-05] Imitation Ghost/[230809]THE IDOLM@STER SHINY COLORS 'CANVAS' 05(FLAC 96kHz_24bit).zip",
+      "size": 784619044,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T07:55:20.066191"
+    },
+    "Canvas-06": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'CANVAS'/[Canvas-06] Reflection/[230913][230927]THE IDOLM@STER SHINY COLORS 'CANVAS' 06(FLAC 96kHz_24bit).zip",
+      "size": 745378910,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:02:20.207593"
+    },
+    "Canvas-07": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'CANVAS'/[Canvas-07] Forbidden Paradise/[231011]THE IDOLM@STER SHINY COLORS 'CANVAS' 07(FLAC 96kHz_24bit).zip",
+      "size": 753724438,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:09:20.139100"
+    },
+    "Canvas-08": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'CANVAS'/[Canvas-08] 無自覚アプリオリ/[230923]無自覚アプリオリ from 'CANVAS' 08(FLAC 96kHz_24bit).zip",
+      "size": 134885552,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:11:55.008210"
+    }
+  },
+  "ECHOES": {
+    "Echos-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-01] STARRY PLACE/[250122] THE IDOLM@STER SHINY COLORS ECHOES 01 (FLAC 96kHz_24bit).zip",
+      "size": 641057075,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:19:33.037942"
+    },
+    "Echos-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-02] 文明開花輪舞 -シティ・ハレルヤ-/[240612] THE IDOLM@STER SHINY COLORS ECHOES 02 (FLAC 96kHz_24bit).zip",
+      "size": 603089315,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:25:18.021735"
+    },
+    "Echos-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-03] 放課後マギア/[240710] THE IDOLM@STER SHINY COLORS ECHOES 03 (FLAC 96kHz_24bit).zip",
+      "size": 899139554,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:33:34.658308"
+    },
+    "Echos-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-04] アスタラブビスタ/[240807] THE IDOLM@STER SHINY COLORS ECHOES 04 (FLAC 96kHz_24bit).zip",
+      "size": 913885043,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:43:08.269173"
+    },
+    "Echos-05": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-05] Cyber Parkour/[240911] THE IDOLM@STER SHINY COLORS ECHOES 05 (FLAC 96kHz_24bit).zip",
+      "size": 875929903,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:51:20.017192"
+    },
+    "Echos-06": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-06] いつかのキミへ/[241009] THE IDOLM@STER SHINY COLORS ECHOES 06 (FLAC 96kHz_24bit).zip",
+      "size": 894576424,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T08:59:36.473960"
+    },
+    "Echos-07": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-07] Monochromatic/[241113] THE IDOLM@STER SHINY COLORS ECHOES 07 (FLAC 96kHz_24bit).zip",
+      "size": 527490596,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:05:37.987708"
+    },
+    "Echos-08": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-08] 泥濘鳴鳴/[241211] THE IDOLM@STER SHINY COLORS ECHOES 08 (FLAC 96kHz_24bit).zip",
+      "size": 544502160,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:11:13.017143"
+    },
+    "Echos-09": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/ECHOES/[Echos-09] Migratory Echoes/[250122] THE IDOLM@STER SHINY COLORS ECHOES 09 (FLAC 96kHz_24bit).zip",
+      "size": 260725776,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:13:56.354580"
+    }
+  },
+  "シャイニーPRオファー": {
+    "PR-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/シャイニーPRオファー/[PR-01] 輝きにかわる/[240417] THE IDOLM@STER SHINY COLORS シャイニーPRオファー Vol.1 (FLAC 96kHz_24bit).zip",
+      "size": 398579813,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:17:53.273891"
+    },
+    "PR-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/シャイニーPRオファー/[PR-02] ONE STAR/[240417] THE IDOLM@STER SHINY COLORS シャイニーPRオファー Vol.2 (FLAC 96kHz_24bit).zip",
+      "size": 549091147,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:23:06.369042"
+    },
+    "PR-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/シャイニーPRオファー/[PR-03] GOTCHA/[240417] THE IDOLM@STER SHINY COLORS シャイニーPRオファー Vol.3 (FLAC 96kHz_24bit).zip",
+      "size": 372596259,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:26:37.002175"
+    }
+  },
+  "“円環 -Halo around-”": {
+    "Halo-01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'円環 -Halo around-'/[Halo-01] Pioneer Impact/[250604] THE IDOLM@STER SHINY COLORS '円環 -Halo around-' 01 (FLAC 96kHz_24bit).zip",
+      "size": 566919195,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:34:09.416341"
+    },
+    "Halo-02": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'円環 -Halo around-'/[Halo-02] 迅雷鉄火/[250702] THE IDOLM@STER SHINY COLORS '円環 -Halo around-' 02 (FLAC 96kHz_24bit).zip",
+      "size": 595540103,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:40:50.851541"
+    },
+    "Halo-03": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'円環 -Halo around-'/[Halo-03] リフレインブレイン/[250806] THE IDOLM@STER SHINY COLORS '円環 -Halo around-' 03 (FLAC 96kHz_24bit).zip",
+      "size": 522891158,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:46:05.320146"
+    },
+    "Halo-04": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/'円環 -Halo around-'/[Halo-04] Sparkle/[250910] THE IDOLM@STER SHINY COLORS '円環 -Halo around-' 04 (FLAC 96kHz_24bit).zip",
+      "size": 613334580,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:53:25.541468"
+    }
+  },
+  "電視動畫相關": {
+    "A01-OP": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/電視動畫相關/[A01-OP] ツバサグラビティ/[231027] Tr_1 from THE IDOLM@STER SHINY COLORS ツバサグラビティ (FLAC 96kHz_24bit).zip",
+      "size": 135760734,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T09:55:58.815552"
+    },
+    "A02-OP": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/電視動畫相關/[A02-OP] プリズムフレア/[241009] アニメ『アイドルマスター シャイニーカラーズ 2nd season』オープニング主題歌「プリズムフレア」 (FLAC 96kHz_24bit).zip",
+      "size": 1131067480,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T10:08:25.066032"
+    },
+    "A02-Halloween": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/電視動畫相關/[A02-Halloween] Happy Surprise Trick!/[241030] アニメ『アイドルマスター シャイニーカラーズ 2nd season』ハロウィンアルバム「Happy Surprise Trick!」 (FLAC 96kHz_24bit).zip",
+      "size": 946627830,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T10:20:28.905932"
+    },
+    "A03-Finalle": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/電視動畫相關/[A03-Finalle] Over the prism/[241225] アニメ『アイドルマスター シャイニーカラーズ 2nd season』主題歌アルバム「Over the prism」 (FLAC 96kHz_24bit).zip",
+      "size": 2105496729,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T10:38:14.649152"
+    },
+    "A04-ADD01": {
+      "uploaded": true,
+      "downloaded": false,
+      "remote_path": "/115/Yuusei/IMAS_SC/電視動畫相關/[A04-ADD01] プリズムフレア -25 colors-/[251004] シャイニーカラーズ「プリズムフレア -25 colors-」 (FLAC 96kHz_24bit).zip",
+      "size": 121025686,
+      "format": "Unknown",
+      "synced_at": "2026-03-07T10:39:46.949452"
+    }
+  }
+}

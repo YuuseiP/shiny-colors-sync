@@ -304,21 +304,32 @@ def parse_albums(content):
 
             # 提取所有链接格式
             # 格式: <a href="URL">名称</a> PW：xxx 或 <a href="URL"><strong>名称</strong></a> PW：xxx
-
-            # 按格式分组提取 - 支持多种格式名称和变体 (WAV, AIFF, ALAC, FLAC, WVP, FLAC+CUE+LOG 等)
-            # 匹配 <strong>后面跟着格式名</strong> 的模式，支持大小写
-            format_sections = re.split(r'<strong>([A-Za-z][A-Za-z0-9+\-]+)</strong>', download_block)
-
-            current_format = "unknown"
+            
+            # 改进：使用更精确的格式分段，只匹配音频格式关键词
+            # 避免把 <strong>Onedrive</strong> 等云盘名称误认为格式
             format_keywords = ['WAV', 'AIFF', 'ALAC', 'FLAC', 'WVP', 'WAVPACK']
-
-            for i, section in enumerate(format_sections):
-                # 检查是否是格式名称
-                section_upper = section.upper()
-                if any(section_upper.startswith(kw) for kw in format_keywords):
-                    current_format = section_upper  # 统一使用大写
-                    continue
-
+            
+            # 构建只匹配音频格式的正则
+            format_pattern = r'<strong>(' + '|'.join(format_keywords) + r')(?:[^<]*)</strong>'
+            
+            # 找到所有格式位置
+            format_matches = list(re.finditer(format_pattern, download_block, re.IGNORECASE))
+            
+            current_format = "unknown"
+            
+            # 处理每个格式段
+            for i, fmt_match in enumerate(format_matches):
+                current_format = fmt_match.group(1).upper()
+                
+                # 获取当前格式到下一个格式之间的内容
+                start_pos = fmt_match.end()
+                if i + 1 < len(format_matches):
+                    end_pos = format_matches[i + 1].start()
+                else:
+                    end_pos = len(download_block)
+                
+                section = download_block[start_pos:end_pos]
+                
                 if not section.strip():
                     continue
 
@@ -336,10 +347,10 @@ def parse_albums(content):
                         "password": pw
                     })
 
-                # 提取 OneDrive 链接 (支持多种域名格式)
-                # 支持 wfhtony.space 和 1drv.ms 短链接
+                # 提取 OneDrive 链接 (支持多种域名格式，包括子域名如 clr2.wfhtony.space)
+                # 支持 wfhtony.space 及其子域名 和 1drv.ms 短链接
                 onedrive_matches = re.findall(
-                    r'<a href="(https?://[^\s"]+wfhtony\.space/s/[^"]+)"[^>]*>(?:<strong>)?[Oo]ne[Dd]rive[^<]*(?:</strong>)?</a>[^P]*PW[：:]\s*([^<\s]+)',
+                    r'<a href="(https?://[^\s\"]+wfhtony\.space/s/[^"]+)"[^>]*>(?:<strong>)?[Oo]ne[Dd]rive[^<]*(?:</strong>)?</a>[^P]*PW[：:]\s*([^<\s]+)',
                     section
                 )
                 for url, pw in onedrive_matches:
@@ -353,7 +364,7 @@ def parse_albums(content):
 
                 # 提取 OneDrive 短链接 (1drv.ms)
                 onedrive_short_matches = re.findall(
-                    r'<a href="(https?://1drv\.ms/[^\s"]+)"[^>]*>(?:<strong>)?[Oo]ne[Dd]rive[^<]*(?:</strong>)?</a>[^P]*PW[：:]\s*([^<\s]+)',
+                    r'<a href="(https?://1drv\.ms/[^\s\"]+)"[^>]*>(?:<strong>)?[Oo]ne[Dd]rive[^<]*(?:</strong>)?</a>[^P]*PW[：:]\s*([^<\s]+)',
                     section
                 )
                 for url, pw in onedrive_short_matches:
@@ -367,7 +378,7 @@ def parse_albums(content):
 
                 # 提取 Google Drive 链接 (支持 file/d 和 open?id 两种格式，链接文字可能包含后缀)
                 gdrive_matches = re.findall(
-                    r'<a href="(https?://drive\.google\.com/(?:file/d/[^\s"]+|open\?id=[^\s"]+))"[^>]*>(?:<strong>)?Google\s*Drive[^<]*(?:</strong>)?</a>',
+                    r'<a href="(https?://drive\.google\.com/(?:file/d/[^\s\"]+|open\?id=[^\s\"]+))"[^>]*>(?:<strong>)?Google\s*Drive[^<]*(?:</strong>)?</a>',
                     section
                 )
                 for url in gdrive_matches:
@@ -377,7 +388,83 @@ def parse_albums(content):
                         "url": url,
                         "password": None
                     })
-
+        
+        # 如果没有找到带格式标签的下载链接，尝试从整个下载块提取（无格式标签的情况）
+        if not album["downloads"] and download_block_match:
+            download_block = download_block_match.group(1)
+            # 尝试从链接文字或URL中推断格式
+            def guess_format(text):
+                text_upper = text.upper()
+                for fmt in ['WAV', 'AIFF', 'ALAC', 'FLAC', 'WVP']:
+                    if fmt in text_upper:
+                        return fmt
+                return 'Unknown'
+            
+            # 辅助函数：提取链接并在后面搜索密码
+            def extract_links_with_password(block, url_pattern):
+                results = []
+                for match in re.finditer(url_pattern, block, re.DOTALL):
+                    url = match.group(1)
+                    end_pos = match.end()
+                    remaining = block[end_pos:]
+                    
+                    # 在到下一个<br>或</p>之间找密码
+                    next_br = re.search(r'<br\s*/?>', remaining)
+                    next_p = re.search(r'</p>', remaining)
+                    
+                    end_positions = [100]  # 最多搜索100个字符
+                    if next_br: end_positions.append(next_br.start())
+                    if next_p: end_positions.append(next_p.start())
+                    
+                    search_region = remaining[:min(end_positions)]
+                    
+                    # 找密码
+                    pw_match = re.search(r'PW[：:]\s*([^<\s]+)', search_region)
+                    pw = pw_match.group(1) if pw_match else None
+                    
+                    results.append((url, pw))
+                return results
+            
+            # 提取百度盘链接
+            baidu_pattern = r'<a href="(https?://pan\.baidu\.com/s/[^"]+)"[^>]*>'
+            for url, pw in extract_links_with_password(download_block, baidu_pattern):
+                album["downloads"].append({
+                    "format": guess_format(url),
+                    "source": "baidu",
+                    "url": url,
+                    "password": pw
+                })
+            
+            # 提取 OneDrive 链接
+            onedrive_pattern = r'<a href="(https?://[^\s\"]+wfhtony\.space/s/[^"]+)"[^>]*>'
+            for url, pw in extract_links_with_password(download_block, onedrive_pattern):
+                album["downloads"].append({
+                    "format": guess_format(url),
+                    "source": "onedrive",
+                    "url": url,
+                    "password": pw
+                })
+            
+            # 提取 OneDrive 短链接 (1drv.ms)
+            onedrive_short_pattern = r'<a href="(https?://1drv\.ms/[^\s\"]+)"[^>]*>'
+            for url, pw in extract_links_with_password(download_block, onedrive_short_pattern):
+                album["downloads"].append({
+                    "format": guess_format(url),
+                    "source": "onedrive",
+                    "url": url,
+                    "password": pw
+                })
+            
+            # 提取 Google Drive 链接 (无密码)
+            gdrive_pattern = r'<a href="(https?://drive\.google\.com/(?:file/d/[^\s\"]+|open\?id=[^\s\"]+))"[^>]*>'
+            for match in re.finditer(gdrive_pattern, download_block, re.DOTALL):
+                album["downloads"].append({
+                    "format": guess_format(match.group(1)),
+                    "source": "google_drive",
+                    "url": match.group(1),
+                    "password": None
+                })
+        
         albums.append(album)
 
     return albums
